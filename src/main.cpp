@@ -20,8 +20,8 @@ struct Settings
 bool isSetup = true;
 size_t setupEnableCount = 5;
 
-#define BUTTON_PIN_1 12
-#define BUTTON_PIN_2 14
+#define BUTTON_PIN_1 0
+#define BUTTON_PIN_2 2
 
 struct Button
 {
@@ -123,14 +123,14 @@ void setup()
 
   pinMode(button1.PIN, INPUT_PULLUP);
   pinMode(button2.PIN, INPUT_PULLUP);
-  attachInterrupt(button1.PIN, button_1_pressed, FALLING);
-  attachInterrupt(button2.PIN, button_2_pressed, FALLING);
+  attachInterrupt(button1.PIN, button_1_pressed, ONLOW_WE);
+  attachInterrupt(button2.PIN, button_2_pressed, ONLOW_WE);
 
   WiFi.mode(WIFI_STA);
 
   // Delay to push SETUP button
   Serial.println("Press button_1 for 5 times");
-  for (int sec = 5; sec > 0; sec--)
+  for (int sec = 15; sec > 0; sec--)
   {
     Serial.print(sec);
     Serial.print("..");
